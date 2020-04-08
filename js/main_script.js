@@ -1,51 +1,4 @@
 
-// create a document the same way as above
-const doc = new PDFDocument;
-
-// pipe the document to a blob
-const stream = doc.pipe(blobStream());
-
-
-// Embed a font, set the font size, and render some text
-
-
-// Add another page
-doc.addPage()
-   .fontSize(25)
-   .text('Here is some vector graphics...', 100, 100);
-
-// Draw a triangle
-doc.save()
-   .moveTo(100, 150)
-   .lineTo(100, 250)
-   .lineTo(200, 250)
-   .fill("#FF3300");
-
-// Apply some transforms and render an SVG path with the 'even-odd' fill rule
-doc.scale(0.6)
-   .translate(470, -380)
-   .path('M 250,75 L 323,301 131,161 369,161 177,301 z')
-   .fill('red', 'even-odd')
-   .restore();
-
-// Add some text with annotations
-doc.addPage()
-   .fillColor("blue")
-   .text('Here is a link!', 100, 100)
-   .underline(100, 100, 160, 27, {color: "#0000FF"})
-   .link(100, 100, 160, 27, 'http://google.com/');
-
-// Finalize PDF file
-
-stream.on('finish', function() {
-/*var iframe = document.querySelector('iframe');*/
-  // get a blob you can do whatever you like with
-	const blob = stream.toBlob('application/pdf');
-	
-saveAs(blob, "download.pdf");
-
- 
-});
 
 function request(url) {
 	console.log('requesting url:');
@@ -94,7 +47,7 @@ function requestArrayBuffer(url) {
   });
 }
 
-function addImageToDoc(name){
+function addImageToDoc(doc, name){
 	var myPromise = request('https://db.ygoprodeck.com/api/v6/cardinfo.php?name=' + name)
 	.then(function (result){
 		var data = JSON.parse(result);
@@ -109,8 +62,69 @@ function addImageToDoc(name){
 	});
 	return myPromise;
 }
-addImageToDoc('Tornado%20Dragon')
-.then(addImageToDoc('Tornado%20Dragon'))
-.then(function(){doc.end();})
-.catch(console.log.bind(console));
+
+function getLines(){
+	return document.getElementById("decklist_input").value.split('\n');
+}
+
+function generateProxies(){
+	var lines = getLines();
+	for(var i = 0; i < lines.length; i++){
+		if(/^\/\//.test(lines[i]) || /^#/.test(lines[i])){
+			console.log("skipping comment " + lines[i]);
+			continue;
+		}
+
+		
+		//var regex_id_nr = 
+		var regex_name = /^(?:([1-9][0-9]*) )?([A-Za-z0-9?!,:"\/-@]+(?: [A-Za-z0-9?!,:"\/-@]+)*)/;
+		var regex_result = regex_name.exec(lines[i]);
+		if(regex_result){
+			var number = regex_result[1] === undefined ? 1 : parseInt(regex_result[1]);
+			//console.log(lines[i]);
+			//console.log(regex_result);
+			console.log("number: " + number);
+			var id_regex_result = /^[0-9]{7}$/.exec(regex_result[2]);
+			if(id_regex_result){
+				console.log("found id: " + regex_result[2]);
+			}
+			else{
+				console.log("found name: " + regex_result[2]);
+			}
+		}
+		else{
+			console.log("could not process line " + lines[i]);
+		}
+		
+	}
+
+
+	// create a document the same way as above
+	const doc = new PDFDocument;
+
+	// pipe the document to a blob
+	const stream = doc.pipe(blobStream());
+	stream.on('finish', function() {
+		/*var iframe = document.querySelector('iframe');*/
+		  // get a blob you can do whatever you like with
+		const blob = stream.toBlob('application/pdf');
+		saveAs(blob, "download.pdf");	 
+	});
+
+
+	// Embed a font, set the font size, and render some text
+
+	// Finalize PDF file
+	var buildTask = new Promise(function(){});
+	
+	buildTask = buildTask
+	.then(function(){return addImageToDoc(doc,'Tornado%20Dragon');})
+		.then(function(){return addImageToDoc(doc,'Dark%20Magician');})
+		.then(function(){doc.end();})
+		.catch(console.log.bind(console));
+		//doc.end();
+	
+}
+
+
 
