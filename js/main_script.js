@@ -94,6 +94,7 @@ function getLines(){
 }
 
 function generateProxies(){
+	imagePos = 0;
 	
 	// create a document the same way as above
 	const doc = new PDFDocument;
