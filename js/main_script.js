@@ -126,7 +126,7 @@ function generateProxies(){
 			//console.log(lines[i]);
 			//console.log(regex_result);
 			console.log("number: " + number);
-			var id_regex_result = /^[0-9]{7}$/.exec(regex_result[2]);
+			var id_regex_result = /^[0-9]{8}$/.exec(regex_result[2]);
 				for(var j = 0; j < number; j++){
 				if(id_regex_result){
 					console.log("found id: " + regex_result[2]);
