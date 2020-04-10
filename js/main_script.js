@@ -34,7 +34,8 @@ function requestArrayBuffer(url) {
         if (xhr.status === 200) {
           resolve(xhr.response)
         } else {
-          reject(xhr.status)
+			console.log("rejecting with " + xhr.status);
+			reject(xhr.status)
         }
       }
     }
@@ -65,21 +66,18 @@ function addImageToDoc(doc){
 	};
 }
 
-function getImageUrlFromID(id){
+function getImageUrl(cardNameOrId){
 	return ()=>{
-		return request('https://db.ygoprodeck.com/api/v6/cardinfo.php?id=' + id)
-		.then(function (result){
-			var data = JSON.parse(result);
-			console.log('requesting result');
-			console.log(data);
-			return requestArrayBuffer(data[0].card_images[0].image_url);
-		});
-	};
-}
-
-function getImageUrlFromName(name){
-	return ()=>{
-		return request('https://db.ygoprodeck.com/api/v6/cardinfo.php?name=' + name)
+		return request('https://db.ygoprodeck.com/api/v6/cardinfo.php?name=' + cardNameOrId)
+		.catch((function(name){return (error)=>request('https://db.ygoprodeck.com/api/v6/cardinfo.php?id=' + name)})(cardNameOrId))
+		.catch(function(name){
+			return (error)=>
+			{
+				while(name.length < 8){
+				name = '0' +name;
+				}
+			return request('https://db.ygoprodeck.com/api/v6/cardinfo.php?id=' + name);}
+		}(cardNameOrId))
 		.then(function (result){
 			var data = JSON.parse(result);
 			console.log('requesting result');
@@ -113,7 +111,7 @@ function generateProxies(){
 	var overallProcess = Promise.resolve();
 	
 	for(var i = 0; i < lines.length; i++){
-		if(/^\/\//.test(lines[i]) || /^#/.test(lines[i])){
+		if(/^\/\//.test(lines[i]) || /^#/.test(lines[i]) || /^!/.test(lines[i])){
 			console.log("skipping comment " + lines[i]);
 			continue;
 		}
@@ -124,30 +122,15 @@ function generateProxies(){
 		var regex_result = regex_name.exec(lines[i]);
 		if(regex_result){
 			var number = regex_result[1] === undefined ? 1 : parseInt(regex_result[1]);
-			//console.log(lines[i]);
-			//console.log(regex_result);
+			console.log(lines[i]);
+			console.log(regex_result);
 			console.log("number: " + number);
-			var id_regex_result = /^[0-9]{8}$/.exec(regex_result[2]);
-				for(var j = 0; j < number; j++){
-				if(id_regex_result){
-					console.log("found id: " + regex_result[2]);
-					overallProcess = overallProcess.then(getImageUrlFromID(regex_result[2])).then(addImageToDoc(doc));
-				}
-				else{
-					console.log("found name: " + regex_result[2]);
-					overallProcess = overallProcess.then(getImageUrlFromName(regex_result[2])).then(addImageToDoc(doc));
-				}
-			}
-		}
-		else{
-			console.log("could not process line " + lines[i]);
-		}
-		
+			overallProcess = overallProcess.then(getImageUrl(regex_result[2]));
+			overallProcess = overallProcess.then(function(innerNumber){return (img)=>Promise.all([...Array(innerNumber).keys()].map(i => addImageToDoc(doc)(img)))}(number));
+	}
 	}
 	
 	overallProcess = overallProcess
-	.then(function(){return addImageToDoc(doc,'Tornado%20Dragon');})
-		.then(function(){return addImageToDoc(doc,'Dark%20Magician');})
 		.then(function(){doc.end();})
 		.catch(console.log.bind(console));
 		//doc.end();
