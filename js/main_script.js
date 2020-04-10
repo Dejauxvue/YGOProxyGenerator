@@ -1,5 +1,3 @@
-
-
 function request(url) {
 	console.log('requesting url:');
 	console.log(url);
@@ -87,9 +85,6 @@ function getImageUrl(cardNameOrId){
 	};
 }
 
-function getLines(){
-	return document.getElementById("decklist_input").value.split('\n');
-}
 
 function generateProxies(){
 	imagePos = 0;
@@ -107,7 +102,7 @@ function generateProxies(){
 	});
 
 
-	var lines = getLines();
+	var lines = document.getElementById("decklist_input").value.split('\n');
 	var overallProcess = Promise.resolve();
 	
 	for(var i = 0; i < lines.length; i++){
@@ -137,5 +132,37 @@ function generateProxies(){
 	
 }
 
+function dragOverHandler(e) {
+  console.log('File(s) in drop zone'); 
+  e.stopPropagation();
+  e.preventDefault();
+}
 
+function dropHandler(ev) {
+  console.log('File(s) dropped');
+
+  // Prevent default behavior (Prevent file from being opened)
+  ev.preventDefault();
+
+  if (ev.dataTransfer.items) {
+    // Use DataTransferItemList interface to access the file(s)
+    for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+      // If dropped items aren't files, reject them
+      if (ev.dataTransfer.items[i].kind === 'file') {
+        var file = ev.dataTransfer.items[i].getAsFile();
+		file.text()
+		.then((content)=>{
+			var ta = document.getElementById("decklist_input");
+			ta.value = ta.value + content;
+		});
+        console.log('... file[' + i + '].name = ' + file.name);
+      }
+    }
+  } else {
+    // Use DataTransfer interface to access the file(s)
+    for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+      console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+    }
+  }
+}
 
