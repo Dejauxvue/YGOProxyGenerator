@@ -8,14 +8,27 @@
 
 <h2>Please enter decklist</h2>
 
-<textarea id="decklist_input" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" rows="4" cols="50">
-// this is a comment
+<textarea id="decklist_input" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" rows="20" cols="70">
+//comments can be initialized by double slash
+# or by hashtag
+! or by exclamatio mark
+//you can enter Card names:
 Dark Magician
+//you can enter 8-digit card ids:
+74677422
+//in both cases you can use a number to have multiples:
+3 89631139
+3 Cyber Dragon
+//you can also drag&drop .ydk files here
+
+//if you're done, click "Generate Proxies", this can take some seconds
 </textarea>
 </br>
 <button type="button" onclick="generateProxies()">Generate Proxies</button>
 </br>
-Data provided by  <a href="https://db.ygoprodeck.com/api-guide/">YGOProDeck</a> 
+Data provided by  <a href="https://db.ygoprodeck.com/api-guide/">YGOProDeck</a> </br>
+Your feedback and questions are much appreciated: <a href="https://github.com/Dejauxvue/YGOProxyGenerator/issues">Give feedback or ask questions</a> 
+
 
 <!--iframe width="600" height="775"></iframe-->
 <script src="../js/FileSaver.js"></script>
