@@ -48,15 +48,27 @@ function requestArrayBuffer(url) {
 
 var imagePos = 0;
 
+const cardWidth = 2.32 * 72;// a card is 2.5 inch and 1 point is 1/72 inch
+const cardHeight = 3.35 * 72;
+const pdfWidth = 550;
+const pdfHeight= 750;
+
 function addImageToDoc(doc){
 	return (img_url)=>{
 			console.log('image: ');
 			console.log(img_url);
-			var xPos = imagePos%3;
-			var yPos = Math.floor(imagePos/3);
+			var scaledHeight = cardHeight * document.getElementById("card_scale").value ;
+			var scaledWidth = cardWidth * document.getElementById("card_scale").value;
+			var scaledWidthPlusMargin = scaledWidth + Number(document.getElementById("margin").value);
+			var scaledHeightPlusMargin = scaledHeight + Number(document.getElementById("margin").value);
+			console.log(scaledWidthPlusMargin);
+			var imgCountHorizontal = Math.floor(pdfWidth / scaledWidthPlusMargin);
+			var imgCountVertical = Math.floor(pdfHeight / scaledHeightPlusMargin);
+			var xPos = imagePos%imgCountHorizontal;
+			var yPos = Math.floor(imagePos/imgCountHorizontal);
 			imagePos = (imagePos + 1);	
-			doc.image(img_url, 10 + xPos * 167, 10 + yPos * 243, {width: 166});
-			if(imagePos >= 9)
+			doc.image(img_url, 30 + xPos * scaledWidthPlusMargin, 30 + yPos * scaledHeightPlusMargin, {width: scaledWidth});
+			if(imagePos >= imgCountHorizontal * imgCountVertical)
 			{
 				doc.addPage();
 				imagePos = 0;
