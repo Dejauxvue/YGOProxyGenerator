@@ -126,7 +126,7 @@ function generateProxies(){
 
 		
 		//var regex_id_nr = 
-		var regex_name = /^(?:([1-9][0-9]*) )?([A-Za-z0-9?!,:"\/\-@]+(?: [A-Za-z0-9?!,:"\/\-@]+)*)/;
+		var regex_name = /^(?:([1-9][0-9]*) )?([A-Za-z0-9?!,:"\/\-.@]+(?: [A-Za-z0-9?!,:"\/\-.@]+)*)/;
 		var regex_result = regex_name.exec(lines[i]);
 		if(regex_result){
 			var number = regex_result[1] === undefined ? 1 : parseInt(regex_result[1]);
