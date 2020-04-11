@@ -59,15 +59,16 @@ function addImageToDoc(doc){
 			console.log(img_url);
 			var scaledHeight = cardHeight * document.getElementById("card_scale").value ;
 			var scaledWidth = cardWidth * document.getElementById("card_scale").value;
-			var scaledWidthPlusMargin = scaledWidth + Number(document.getElementById("margin").value);
-			var scaledHeightPlusMargin = scaledHeight + Number(document.getElementById("margin").value);
+			var scaledWidthPlusMargin = scaledWidth + Number(document.getElementById("margin_cards").value);
+			var scaledHeightPlusMargin = scaledHeight + Number(document.getElementById("margin_cards").value);
 			console.log(scaledWidthPlusMargin);
 			var imgCountHorizontal = Math.floor(pdfWidth / scaledWidthPlusMargin);
 			var imgCountVertical = Math.floor(pdfHeight / scaledHeightPlusMargin);
 			var xPos = imagePos%imgCountHorizontal;
 			var yPos = Math.floor(imagePos/imgCountHorizontal);
 			imagePos = (imagePos + 1);	
-			doc.image(img_url, 30 + xPos * scaledWidthPlusMargin, 30 + yPos * scaledHeightPlusMargin, {width: scaledWidth});
+			doc.image(img_url, Number(document.getElementById("margin_document").value) + xPos * scaledWidthPlusMargin, 
+				Number(document.getElementById("margin_document").value) + yPos * scaledHeightPlusMargin, {width: scaledWidth});
 			if(imagePos >= imgCountHorizontal * imgCountVertical)
 			{
 				doc.addPage();
