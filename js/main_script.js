@@ -76,12 +76,12 @@ function getImageUrl(cardNameOrId){
 				}
 			return request('https://db.ygoprodeck.com/api/v6/cardinfo.php?id=' + name);}
 		}(cardNameOrId))
-		.then(function (result){
+		/*.then(function (result){
 			var data = JSON.parse(result);
 			console.log('requesting result');
 			console.log(data);
 			return requestArrayBuffer(data[0].card_images[0].image_url);
-		});
+		})*/;
 	};
 }
 
@@ -126,9 +126,6 @@ function generateProxies(){
 	return Promise.resolve();}
 	));
 		
-	
-	
-	
 	overallProcess = overallProcess
 		.then(function(){doc.end();})
 		.catch(console.log.bind(console));
