@@ -103,27 +103,31 @@ function generateProxies(){
 
 
 	var lines = document.getElementById("decklist_input").value.split('\n');
-	var overallProcess = Promise.resolve();
-	
-	for(var i = 0; i < lines.length; i++){
-		if(/^\/\//.test(lines[i]) || /^#/.test(lines[i]) || /^!/.test(lines[i])){
-			console.log("skipping comment " + lines[i]);
-			continue;
+	var overallProcess = Promise.all(
+	lines.map((l)=>
+	{
+		if(/^\/\//.test(l) || /^#/.test(l) || /^!/.test(l)){
+			console.log("skipping comment " + l);
+			return Promise.resolve();
 		}
-
-		
+	
 		//var regex_id_nr = 
 		var regex_name = /^(?:([1-9][0-9]*) )?([A-Za-z0-9?!,:"\/-@]+(?: [A-Za-z0-9?!,:"\/-@]+)*)/;
-		var regex_result = regex_name.exec(lines[i]);
+		var regex_result = regex_name.exec(l);
 		if(regex_result){
 			var number = regex_result[1] === undefined ? 1 : parseInt(regex_result[1]);
-			console.log(lines[i]);
+			console.log(l);
 			console.log(regex_result);
 			console.log("number: " + number);
-			overallProcess = overallProcess.then(getImageUrl(regex_result[2]));
-			overallProcess = overallProcess.then(function(innerNumber){return (img)=>Promise.all([...Array(innerNumber).keys()].map(i => addImageToDoc(doc)(img)))}(number));
-	}
-	}
+			return Promise.resolve()
+			.then(getImageUrl(regex_result[2]))
+		.then((function(innerNumber){return (img)=>Promise.all([...Array(innerNumber).keys()].map(i => addImageToDoc(doc)(img)))}(number)));
+		}
+	return Promise.resolve();}
+	));
+		
+	
+	
 	
 	overallProcess = overallProcess
 		.then(function(){doc.end();})
