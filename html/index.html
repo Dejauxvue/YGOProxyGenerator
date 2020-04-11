@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
- <head>
-    <meta charset="utf-8" />
-    <title>YGOProxyGenerator</title>
+  <head>
+      <meta charset="utf-8" />
+      <link href="style.css" type="text/css" rel="stylesheet">
+      <title>YGOProxyGenerator</title>
   </head>
-<body>
 
-<h2>Please enter decklist</h2>
+  <body>
 
-<textarea id="decklist_input" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" rows="20" cols="70">
+    <header>
+      <h1>YGOProxies</h1>  
+    </header>
+
+    <div class="content">
+      <h2>Enter you Decklist here:</h2>
+      <textarea id="decklist_input" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" rows="20" cols="70">
 //comments can be initialized by double slash
 # or by hashtag
 ! or by exclamatio mark
@@ -22,29 +28,40 @@ Dark Magician
 //you can also drag&drop .ydk files here
 
 //if you're done, click "Generate Proxies", this can take some seconds
-</textarea>
-</br>
-<input id="card_scale" type=number step=0.01 min=0 max=3 value="0.95"/> Card size scale 
-</br>
-<input id="margin_cards" type=number step=1 min=0 max=100 value="0"/> Margin between cards
-</br>
-<input id="margin_document" type=number step=1 min=0 max=1000 value="20"/> Margin between first card and document border
-</br>
-<button type="button" onclick="generateProxies()">Generate Proxies</button>
-</br>
-Data provided by  <a href="https://db.ygoprodeck.com/api-guide/">YGOProDeck</a> </br>
-Your feedback and questions are much appreciated: <a href="https://github.com/Dejauxvue/YGOProxyGenerator/issues">Give feedback or ask questions</a> 
+      </textarea>
+      <button type="button" onclick="generateProxies()">Generate Proxies</button>
+      </br>
 
+      <input type="checkbox" id="toggle">
 
-<!--iframe width="600" height="775"></iframe-->
-<script src="../js/FileSaver.js"></script>
-<script src="../js/blob-stream.js"></script>
-<script src="../js/pdfkit.standalone.js">
-</script>
-<script src="../js/main_script.js">
-</script>
+      <label for="toggle" class="button">Show Settings</label>
+      </br>
 
-</body>
+      <div class="settings">
+        <input id="card_scale" type=number step=0.01 min=0 max=3 value="0.95"/> Card size scale 
+        </br>
+        <input id="margin_cards" type=number step=1 min=0 max=100 value="0"/> Margin between cards
+        </br>
+        <input id="margin_document" type=number step=1 min=0 max=1000 value="20"/> Margin between first card and document border
+        </br>
+        </br>
+      </div>
+    </div>
+
+    <footer>
+    Data provided by  <a href="https://db.ygoprodeck.com/api-guide/">YGOProDeck</a> </br>
+    Your feedback and questions are much appreciated: <a href="https://github.com/Dejauxvue/YGOProxyGenerator/issues">Give feedback or ask questions</a> 
+    </footer>
+
+    <!--iframe width="600" height="775"></iframe-->
+    <script src="../js/FileSaver.js"></script>
+    <script src="../js/blob-stream.js"></script>
+    <script src="../js/pdfkit.standalone.js">
+    </script>
+    <script src="../js/main_script.js">
+    </script>
+
+  </body>
 </html>
 
 

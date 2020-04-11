@@ -1,0 +1,50 @@
+:root{
+  --whiteish: #f8fdff;
+  --darkblue: #1a234c;
+  --lightblue: #e6f7f7;
+  --coral: #fa4d49;
+  --butter: #f9dd79;
+  --emerald: #7ebf84;
+}
+
+html {
+  font-family: 'Helvetica', sans-serif;
+}
+
+header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 99;
+  width: 100%;
+  background-color: var(--darkblue);
+}
+
+h1 {
+  color: var(--lightblue);
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: var(--whiteish);
+}
+
+.content {
+  margin-top: 100px;
+}
+
+.button {
+  background-color: var(--coral);
+}
+
+/* Settings Toggle */
+
+.settings, #toggle {
+  display: none;
+}
+
+#toggle:checked ~ .settings{
+  display: inline;
+}
