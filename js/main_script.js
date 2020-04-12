@@ -50,8 +50,8 @@ var imagePos = 0;
 
 const cardWidth = 2.32 * 72;// a card is 2.5 inch and 1 point is 1/72 inch
 const cardHeight = 3.35 * 72;
-const pdfWidth = 550;
-const pdfHeight= 750;
+const pdfWidth = 8.27 * 72;
+const pdfHeight= 11.69 * 72;
 
 function addImageToDoc(doc){
 	return (img_url)=>{
@@ -62,8 +62,8 @@ function addImageToDoc(doc){
 			var scaledWidthPlusMargin = scaledWidth + Number(document.getElementById("margin_cards").value);
 			var scaledHeightPlusMargin = scaledHeight + Number(document.getElementById("margin_cards").value);
 			console.log(scaledWidthPlusMargin);
-			var imgCountHorizontal = Math.floor(pdfWidth / scaledWidthPlusMargin);
-			var imgCountVertical = Math.floor(pdfHeight / scaledHeightPlusMargin);
+			var imgCountHorizontal = Math.floor((pdfWidth - 2*document.getElementById("margin_document").value) / scaledWidthPlusMargin);
+			var imgCountVertical = Math.floor((pdfHeight-2*document.getElementById("margin_document").value) / scaledHeightPlusMargin);
 			var xPos = imagePos%imgCountHorizontal;
 			var yPos = Math.floor(imagePos/imgCountHorizontal);
 			imagePos = (imagePos + 1);	
