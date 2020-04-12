@@ -13,29 +13,11 @@
     </header>
 
     <div class="content">
-      <h2>Enter you Decklist here:</h2>
-      <textarea id="decklist_input" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" rows="20" cols="70">
-//comments can be initialized by double slash
-# or by hashtag
-! or by exclamatio mark
-//you can enter Card names:
-Dark Magician
-//you can enter 8-digit card ids:
-74677422
-//in both cases you can use a number to have multiples:
-3 89631139
-3 Cyber Dragon
-//you can also drag&drop .ydk files here
-
-//if you're done, click "Generate Proxies", this can take some seconds
-      </textarea>
-      <button type="button" onclick="generateProxies()">Generate Proxies</button>
-      </br>
-
-      <input type="checkbox" id="toggle">
-
-      <label for="toggle" class="button">Show Settings</label>
-      </br>
+      <div class="decklist">
+        <h3>Enter you Decklist here:</h3>
+        <textarea id="decklist_input" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" rows="20" cols="50">
+        </textarea>
+      </div>
 
       <div class="settings">
         <input id="card_scale" type=number step=0.01 min=0 max=3 value="0.95"/> Card size scale 
@@ -44,7 +26,24 @@ Dark Magician
         </br>
         <input id="margin_document" type=number step=1 min=0 max=1000 value="20"/> Margin between first card and document border
         </br>
-        </br>
+      </div>
+
+      <div class="btn">
+        <button type="button" onclick="generateProxies()">Generate Proxies</button>
+      </div>
+
+      <div class="howto">
+        <h3>How to use</h3>
+        <p>
+          Enter Cards by Name or 8-digit ID: <br>
+          Dark Magician <br>
+          74677422 <br> <br>
+          
+          Set Quantity with Numbers if you need multiples: <br>
+          3 Cyber Dragon <br>
+          3 89631139 <br> <br>
+          
+          You can also drag&drop .ydk files here into the Textbox!</p>
       </div>
     </div>
 

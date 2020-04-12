@@ -32,19 +32,94 @@ body {
 }
 
 .content {
-  margin-top: 100px;
+  margin: 10px;
+  margin-top: 80px;
+  position: relative;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-areas:
+  'decklist howto'
+  'settings settings'
+  'btn btn';
 }
 
-.button {
-  background-color: var(--coral);
+.decklist {
+  grid-area: decklist;
 }
 
-/* Settings Toggle */
-
-.settings, #toggle {
-  display: none;
+.howto {
+  grid-area: howto;
 }
 
-#toggle:checked ~ .settings{
-  display: inline;
+.settings {
+  grid-area: settings;
+}
+
+.btn {
+  grid-area: btn;
+}
+
+/* Button Properties */
+
+button {
+  margin: 5px;
+  transform: translate(0%,0%);
+  width: 13rem;
+  height: 5rem;
+  color: var(--lightblue);
+  background: var(--darkblue);
+  border: 0px;
+  border-radius: 4px;
+  font-size: 18px;
+  transition: .6s;
+  overflow: hidden;
+}
+
+button:focus {
+  outline: none;
+}
+
+button::before {
+  content: '';
+  display: block;
+  position: absolute;
+  background: var(--emerald);
+  width: 60px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: .5s;
+  filter: blur(30px);
+  transform: translateX(-130px) skewX(-15deg);
+}
+
+button::after {
+  content: '';
+  display: block;
+  position: absolute;
+  background: var(--whiteish);
+  width: 30px;
+  height: 100%;
+  left: 30px;
+  top: 0;
+  opacity: 0;
+  filter: blur(30px);
+  transform: translateX(-100px) skaleX(-15deg);
+}
+
+button:hover {
+  background: var(--emerald);
+  cursor: pointer;
+}
+
+button:hover::before {
+  transform: translateX(300px) skewX(-15deg);
+  opacity: .6;
+  transition: .7s;
+}
+
+button:hover::after {
+  transform: translateX(300px) skewX(-15deg);
+  opacity: 1;
+  transition: .7s;
 }
