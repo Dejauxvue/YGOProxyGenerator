@@ -303,7 +303,7 @@ button:active {
 
 /* Media Queries */
 
-@media (max-width: 640px) {
+@media (orientation: portrait) {
   .wrapper {
     grid-template-columns: 1fr;
   }
