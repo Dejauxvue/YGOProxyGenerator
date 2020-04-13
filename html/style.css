@@ -162,6 +162,11 @@ textarea, input[type=number]  {
 
 textarea {
   border: 4px solid var(--orange);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  width: 100%;
 }
 
 input[type=number] {
