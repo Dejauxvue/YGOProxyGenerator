@@ -49,7 +49,7 @@ a{
   display: none;
   background: var(--orange);
   color: var(--darkblue);
-  width: 140px;
+  width: 12rem;
   text-align: center;
   border-radius: 9px;
   padding: 0.3rem;
@@ -301,7 +301,9 @@ button:active {
   transform: translateY(10px);
 }
 
+/*               */
 /* Media Queries */
+/*               */
 
 @media (orientation: portrait) {
   .wrapper {
@@ -310,7 +312,7 @@ button:active {
 
   .content {
     margin: 10px;
-    margin-top: 60px;
+    margin-top: 10rem;
     position: relative;
     display: grid;
     grid-column: 1;
@@ -328,20 +330,32 @@ button:active {
     'footer'
   }
 
+  textarea {
+    width:100%;
+  }
+
   #mobilehowto {
     display: block;
+    font-size: 2rem;
+  }
+
+  h1 {
+    text-indent: 2rem;
+    font-size: 4rem;
   }
 
   h3 {
-    font-size: 30px;
+    font-size: 3rem;
     text-align: center;
   }
 
   .decklist {
+    width:100%;
     margin-top: -3rem;
   }
 /* Settings Grid */
   .grid {
+    width:100%;
     display: grid;
     justify-items: center;
     grid-template-areas:
@@ -355,17 +369,21 @@ button:active {
 
   .scale, .marginc, .margind{
     position: relative;
-    top: 0.4rem;
+    top: 0.5rem;
     margin-bottom: 0.5rem;
-    cursor: help;
+    cursor: default;
+    font-size: 3rem;
+    text-align: center;
+    max-width: 40rem;
   }
+
 
   input[type=number] {
     border: 2px solid var(--orange);
-    width: 200px;
-    height: 50px;
+    width: 300px;
+    height: 100px;
     margin: 0.25rem;
-    font-size: 32px;
+    font-size: 4rem;
   }
 
   .howto {
@@ -388,5 +406,15 @@ button:active {
     left: 0;
     text-align: left;
   }
+    /* Tooltips */
+  [tooltip1]::after, [tooltip2]::after, [tooltip3]::after {
+    display: none;
+  }
 
+    /* Button */
+  button {
+    width:30rem;
+    height: 10rem;
+    font-size: 2rem;
+  }
 }
