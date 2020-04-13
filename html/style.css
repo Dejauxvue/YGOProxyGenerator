@@ -7,6 +7,7 @@
 
 html, button, input[type=number] {
   font-family: 'Exo 2', sans-serif;
+  cursor: default;
 }
 
 header {
@@ -132,6 +133,7 @@ footer {
 .scale, .marginc, .margind{
   position: relative;
   top: 0.4rem;
+  cursor: help;
 }
 
 .scale {
