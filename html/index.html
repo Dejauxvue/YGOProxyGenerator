@@ -25,6 +25,10 @@
           <img src="https://picsum.photos/900/151">
         </div>
 
+        <div class="mobile">
+          <a id="mobilehowto" href="#howto">Instructions</a>
+        </div>
+
         <div class="decklist">
           <h3>Enter your Decklist here</h3>
           <textarea id="decklist_input" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" rows="16" cols="40"></textarea>
@@ -50,7 +54,7 @@
           <button type="button" onclick="generateProxies()">Generate Proxies <br> Download PDF</button>
         </div>
 
-        <div class="howto">
+        <div class="howto" id="howto">
           <h3>Instructions</h3>
           <p>
             Enter card name or 8-digit card-ID:<br>

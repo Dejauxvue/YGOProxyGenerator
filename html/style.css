@@ -45,6 +45,20 @@ a{
   color: var(--orange);
 }
 
+#mobilehowto {
+  display: none;
+  background: var(--orange);
+  color: var(--darkblue);
+  width: 140px;
+  text-align: center;
+  border-radius: 9px;
+  padding: 0.3rem;
+  margin-top: 2rem;
+  margin-bottom: 0;
+  align-items: center;
+  grid-area: mobile;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -300,18 +314,79 @@ button:active {
     position: relative;
     display: grid;
     grid-column: 1;
+    grid-row: 8;
     grid-gap: 20px;
+    justify-items: center;
     grid-template-areas:
     'ad1'
+    'mobile'
     'decklist'
     'settings'
     'btn'
     'ad2'
     'howto'
+    'footer'
+  }
+
+  #mobilehowto {
+    display: block;
+  }
+
+  h3 {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .decklist {
+    margin-top: -3rem;
+  }
+/* Settings Grid */
+  .grid {
+    display: grid;
+    justify-items: center;
+    grid-template-areas:
+    'scale'
+    'card_scale'
+    'marginc'
+    'margin_cards'
+    'margind'
+    'margin_document';
+  }
+
+  .scale, .marginc, .margind{
+    position: relative;
+    top: 0.4rem;
+    margin-bottom: 0.5rem;
+    cursor: help;
+  }
+
+  input[type=number] {
+    border: 2px solid var(--orange);
+    width: 200px;
+    height: 50px;
+    margin: 0.25rem;
+    font-size: 32px;
+  }
+
+  .howto {
+    border-radius: 9px;
+    border-width: 4px;
+    border-style: solid;
+    border-color: var(--orange);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .howto p, .howto h3 {
+    color: var(--lightblue);
   }
 
   footer {
-    display: none;
+    position: relative;
+    grid-area: footer;
+    bottom: 0;
+    left: 0;
+    text-align: left;
   }
 
 }
