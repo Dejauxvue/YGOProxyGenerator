@@ -5,9 +5,15 @@
   --orange: #e46544;
 }
 
+/* Global */
+
 html, button, input[type=number] {
   font-family: 'Exo 2', sans-serif;
   cursor: default;
+}
+
+a{
+  text-decoration: none;
 }
 
 header {
@@ -20,9 +26,28 @@ header {
   box-shadow: 0 0 20px -10px;
 }
 
-h1, h3, p, footer, .settings {
+/* Colors */
+
+#mobilehowto, [tooltip1]::after, [tooltip2]::after, [tooltip3]::after, button {
+color: var(--darkblue);
+}
+header, body {
+  background-color: var(--darkblue);
+}
+
+h1, h3, p, footer, .settings, .howto p, .howto h3 {
   color: var(--lightblue);
 }
+
+a, textarea, input[type=number] {
+  color: var(--orange);
+}
+
+#mobilehowto, [tooltip1]::after, [tooltip2]::after, [tooltip3]::after, button, button::before, button:hover {
+  background: var(--orange);
+}
+
+/* Global */
 
 p, .settings {
   font-size: 18px;
@@ -36,19 +61,8 @@ h3 {
   font-size: 24px;
 }
 
-header, body {
-  background-color: var(--darkblue);
-}
-
-a{
-  text-decoration: none;
-  color: var(--orange);
-}
-
 #mobilehowto {
   display: none;
-  background: var(--orange);
-  color: var(--darkblue);
   width: 12rem;
   text-align: center;
   border-radius: 9px;
@@ -77,7 +91,8 @@ footer {
   text-align: right;
 }
 
- /* Grid & Grid Elements*/
+ /* Main Grid */
+
 .content {
   margin: 10px;
   margin-top: 60px;
@@ -88,7 +103,7 @@ footer {
   grid-template-areas:
   'ad1 ad1'
   'decklist howto'
-  'settings settings'
+  'settings howto'
   'btn btn'
   'ad2 ad2';
 }
@@ -164,12 +179,11 @@ footer {
   grid-area: margind;
 }
 
-/* Input */
+/* Input Styles */
 
 textarea, input[type=number]  {
   border-radius: 9px;
   background: none;
-  color: var(--orange);
   font-size: 24px;
 }
 
@@ -193,8 +207,6 @@ input[type=number] {
 /* Tooltips */
 
 [tooltip1]::after, [tooltip2]::after, [tooltip3]::after {
-  background: var(--orange);
-  color: var(--darkblue);
   text-align: center;
   box-sizing: border-box;
   padding: 10px;
@@ -231,9 +243,6 @@ input[type=number] {
 }
 
 /* Button */
-button, button::before, button:hover {
-  background: var(--orange);
-}
 
 button {
   margin: 0px;
@@ -242,7 +251,6 @@ button {
   transform: translate(0%,0%);
   width: 13rem;
   height: 5rem;
-  color: var(--darkblue);
   border: 0;
   border-radius: 9px;
   font-size: 18px;
@@ -327,7 +335,7 @@ button:active {
     'btn'
     'ad2'
     'howto'
-    'footer'
+    'footer';
   }
 
   textarea {
@@ -353,7 +361,9 @@ button:active {
     width:100%;
     margin-top: -3rem;
   }
-/* Settings Grid */
+
+  /* Settings Grid */
+
   .grid {
     width:100%;
     display: grid;
@@ -395,10 +405,6 @@ button:active {
     padding-right: 1rem;
   }
 
-  .howto p, .howto h3 {
-    color: var(--lightblue);
-  }
-
   footer {
     position: relative;
     grid-area: footer;
@@ -406,12 +412,15 @@ button:active {
     left: 0;
     text-align: left;
   }
-    /* Tooltips */
+  
+  /* Tooltips */
+
   [tooltip1]::after, [tooltip2]::after, [tooltip3]::after {
     display: none;
   }
 
-    /* Button */
+  /* Button */
+
   button {
     width:30rem;
     height: 10rem;
