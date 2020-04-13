@@ -171,7 +171,6 @@ textarea, input[type=number]  {
   background: none;
   color: var(--orange);
   font-size: 24px;
-  text-align: center;
 }
 
 textarea {
@@ -188,6 +187,7 @@ input[type=number] {
   width: 70px;
   margin: 0.25rem;
   font-size: 18px;
+  text-align: center;
 }
 
 /* Tooltips */
