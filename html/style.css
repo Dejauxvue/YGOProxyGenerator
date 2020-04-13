@@ -53,7 +53,7 @@ body {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 2fr 4fr 2fr;
+  grid-template-columns: 2fr 8fr 2fr;
 }
 
 footer {
@@ -285,4 +285,33 @@ button:hover::after {
 
 button:active {
   transform: translateY(10px);
+}
+
+/* Media Queries */
+
+@media (max-width: 640px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .content {
+    margin: 10px;
+    margin-top: 60px;
+    position: relative;
+    display: grid;
+    grid-column: 1;
+    grid-gap: 20px;
+    grid-template-areas:
+    'ad1'
+    'decklist'
+    'settings'
+    'btn'
+    'ad2'
+    'howto'
+  }
+
+  footer {
+    display: none;
+  }
+
 }
