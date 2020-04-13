@@ -106,6 +106,41 @@ footer {
   bottom: 0;
 }
 
+/* Settings Grid */
+
+.grid {
+  display: grid;
+  grid-template-areas:
+  'card_scale scale'
+  'margin_cards marginc'
+  'margin_document margind';
+  grid-auto-columns: 1fr 10fr;
+}
+
+#card_scale {
+  grid-area: card_scale;
+}
+
+#margin_cards {
+  grid-area: margin_cards;
+}
+
+#margin_document {
+  grid-area: margin_document;
+}
+
+.scale {
+  grid-area: scale;
+}
+
+.marginc {
+  grid-area: marginc;
+}
+
+.margind {
+  grid-area: margind;
+}
+
 /* Input */
 
 textarea, input[type=number]  {
@@ -121,8 +156,26 @@ textarea {
 
 input[type=number] {
   border: 2px solid var(--orange);
-  width: 100px;
+  width: 70px;
   margin: 0.25rem;
+  font-size: 18px;
+}
+
+/* Tooltips */
+
+[tooltip1]::after {
+  background: var(--orange);
+  color: var(--darkblue);
+  text-align: center;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 240px;
+  position: absolute;
+  left: calc(50%-1px);
+  bottom: 125%;
+  border-radius: 9px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  content: attr(tooltip1);
 }
 
 /* Button */

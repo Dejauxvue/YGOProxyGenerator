@@ -32,12 +32,18 @@
 
         <div class="settings">
           <h3>Settings</h3>
-          <input id="card_scale" type=number step=0.01 min=0 max=3 value="0.95"/> Card size scale 
-          </br>
-          <input id="margin_cards" type=number step=1 min=0 max=100 value="0"/> Margin between cards
-          </br>
-          <input id="margin_document" type=number step=1 min=0 max=1000 value="20"/> Margin between first card and document border
-          </br>
+          <div class="grid">
+            <input id="card_scale" type=number step=0.01 min=0 max=3 value="0.95"/> 
+            <p class="scale" tooltip1="Test1">Card size scale</p>
+            
+            <input id="margin_cards" type=number step=1 min=0 max=100 value="0"/>
+            <p class="marginc" tooltip2="Test2">Margin between cards</p>
+            
+            <input id="margin_document" type=number step=1 min=0 max=1000 value="20"/>
+            <p class="margind" tooltip3="Test3">Margin between first card and document border</p>
+            
+          </div>
+          
         </div>
 
         <div class="btn">
@@ -47,14 +53,14 @@
         <div class="howto">
           <h3>Instructions</h3>
           <p>
-            Enter the cards by name or 8-digit card ID:<br>
+            Enter card name or 8-digit card-ID:<br>
             Dark Magician <br>
             74677422 <br> <br>
-            Set the quantity before the name/number: <br>
+            Set the quantity before the name/ID: <br>
             3 Cyber Dragon <br>
             3 89631139 <br> <br>
             Or just drag & drop your .ydk files into the textbox if you're feeling lazy!<br> <br>
-            YGOProxys will then generate a .pdf file for your proxys. <br>
+            YGOProxys will then generate a .pdf file with your Yu-Gi-Oh! card proxys. <br>
             This might take a few seconds.</p>
         </div>
       </div>
