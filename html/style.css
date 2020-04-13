@@ -426,4 +426,16 @@ button:active {
     height: 10rem;
     font-size: 2rem;
   }
+
+  button:hover::before {
+    transform: translateX(600px) skewX(-15deg);
+    opacity: .6;
+    transition: .7s;
+  }
+  
+  button:hover::after {
+    transform: translateX(600px) skewX(-15deg);
+    opacity: 1;
+    transition: .7s;
+  }
 }
