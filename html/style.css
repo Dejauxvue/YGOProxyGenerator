@@ -129,6 +129,11 @@ footer {
   grid-area: margin_document;
 }
 
+.scale, .marginc, .margind{
+  position: relative;
+  top: 0.4rem;
+}
+
 .scale {
   grid-area: scale;
 }
@@ -148,6 +153,7 @@ textarea, input[type=number]  {
   background: none;
   color: var(--orange);
   font-size: 24px;
+  text-align: center;
 }
 
 textarea {
@@ -163,7 +169,7 @@ input[type=number] {
 
 /* Tooltips */
 
-[tooltip1]::after {
+[tooltip1]::after, [tooltip2]::after, [tooltip3]::after {
   background: var(--orange);
   color: var(--darkblue);
   text-align: center;
@@ -171,11 +177,34 @@ input[type=number] {
   padding: 10px;
   width: 240px;
   position: absolute;
-  left: calc(50%-1px);
+  left: -18%;
   bottom: 125%;
   border-radius: 9px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+[tooltip1]::after {
   content: attr(tooltip1);
+}
+
+[tooltip2]::after {
+  content: attr(tooltip2);
+}
+
+[tooltip3]::after {
+  content: attr(tooltip3);
+}
+
+[tooltip1]:hover::after, [tooltip2]:hover::after, [tooltip3]:hover::after {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Button */

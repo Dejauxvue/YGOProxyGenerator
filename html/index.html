@@ -34,14 +34,14 @@
           <h3>Settings</h3>
           <div class="grid">
             <input id="card_scale" type=number step=0.01 min=0 max=3 value="0.95"/> 
-            <p class="scale" tooltip1="Test1">Card size scale</p>
+            <span class="scale" tooltip1="Adjust the card size. A factor of 0.95 means that the cards will be 95% of their original size">Card size scale</span>
             
             <input id="margin_cards" type=number step=1 min=0 max=100 value="0"/>
-            <p class="marginc" tooltip2="Test2">Margin between cards</p>
+            <span class="marginc" tooltip2="Set the amount of space between the cards in the PDF. Margin of 0 means there will be no space in between cards.">Margin between cards</span>
             
             <input id="margin_document" type=number step=1 min=0 max=1000 value="20"/>
-            <p class="margind" tooltip3="Test3">Margin between first card and document border</p>
-            
+            <span class="margind" tooltip3="Set the amount of space between the first card and the border of the PDF. This is needed because most printes can't print from edge to edge.">Margin between first card and document border</span>
+        
           </div>
           
         </div>
