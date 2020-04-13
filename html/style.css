@@ -2,45 +2,86 @@
   --whiteish: #f8fdff;
   --darkblue: #1a234c;
   --lightblue: #e6f7f7;
-  --coral: #fa4d49;
-  --butter: #f9dd79;
-  --emerald: #7ebf84;
+  --orange: #e46544;
 }
 
-html {
-  font-family: 'Helvetica', sans-serif;
+html, button {
+  font-family: 'Exo 2', sans-serif;
 }
 
 header {
+  text-indent: 1rem;
   position: fixed;
   top: 0px;
   left: 0px;
   z-index: 99;
   width: 100%;
+  box-shadow: 0 0 20px -10px;
+}
+
+h1, h3, p, footer, .settings {
+  color: var(--lightblue);
+}
+
+p, .settings {
+  font-size: 18px;
+}
+
+h3 {
+  text-align: left;
+  margin:0;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  font-size: 24px;
+}
+
+header, body {
   background-color: var(--darkblue);
 }
 
-h1 {
-  color: var(--lightblue);
+a{
+  text-decoration: none;
+  color: var(--orange);
 }
 
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-color: var(--whiteish);
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+}
+
+ /* Grid Properties */
 .content {
   margin: 10px;
-  margin-top: 80px;
+  margin-top: 60px;
   position: relative;
   display: grid;
-  grid-gap: 10px;
+  grid-column: 2;
+  grid-gap: 20px;
   grid-template-areas:
+  'ad1 ad1'
   'decklist howto'
   'settings settings'
-  'btn btn';
+  'btn btn'
+  'ad2 ad2';
+}
+
+.ad1 {
+  grid-area: ad1;
+  margin: 0.5rem;
+  margin-bottom: 0;
+  display: none;
+}
+
+.ad2 {
+  grid-area: ad2;
+  margin: .5rem;
+  display: none;
 }
 
 .decklist {
@@ -53,23 +94,33 @@ body {
 
 .settings {
   grid-area: settings;
+  margin-top: -20px;
 }
 
 .btn {
   grid-area: btn;
 }
 
+footer {
+  position: fixed;
+  bottom: 0;
+}
+
 /* Button Properties */
+button, button::before, button:hover {
+  background: var(--orange);
+}
 
 button {
-  margin: 5px;
+  margin: 0px;
+  margin-top: 0.5rem;
+  margin-left: 0px;
   transform: translate(0%,0%);
   width: 13rem;
   height: 5rem;
-  color: var(--lightblue);
-  background: var(--darkblue);
-  border: 0px;
-  border-radius: 4px;
+  color: var(--darkblue);
+  border: 0;
+  border-radius: 9px;
   font-size: 18px;
   transition: .6s;
   overflow: hidden;
@@ -83,7 +134,6 @@ button::before {
   content: '';
   display: block;
   position: absolute;
-  background: var(--emerald);
   width: 60px;
   height: 100%;
   left: 0;
@@ -108,7 +158,6 @@ button::after {
 }
 
 button:hover {
-  background: var(--emerald);
   cursor: pointer;
 }
 
@@ -122,4 +171,8 @@ button:hover::after {
   transform: translateX(300px) skewX(-15deg);
   opacity: 1;
   transition: .7s;
+}
+
+button:active {
+  transform: translateY(10px);
 }
