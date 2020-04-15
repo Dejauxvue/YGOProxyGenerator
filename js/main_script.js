@@ -47,6 +47,8 @@ function requestArrayBuffer(url) {
 }
 
 var imagePos = 0;
+var progress = 0;
+var taskSize = 0;
 
 const cardWidth = 2.32 * 72;// a card is 2.5 inch and 1 point is 1/72 inch
 const cardHeight = 3.35 * 72;
@@ -98,9 +100,9 @@ function getImageUrl(cardNameOrId){
 	};
 }
 
-
 function generateProxies(){
 	imagePos = 0;
+	progress = 0;
 	
 	// create a document the same way as above
 	const doc = new PDFDocument;
@@ -116,11 +118,13 @@ function generateProxies(){
 
 
 	var lines = document.getElementById("decklist_input").value.split('\n');
+	taskSize = lines.length;
 	var overallProcess = Promise.resolve();
 	
 	for(var i = 0; i < lines.length; i++){
 		if(/^\/\//.test(lines[i]) || /^#/.test(lines[i]) || /^!/.test(lines[i])){
 			console.log("skipping comment " + lines[i]);
+			incrementProgress();
 			continue;
 		}
 
@@ -134,15 +138,16 @@ function generateProxies(){
 			console.log(regex_result);
 			console.log("number: " + number);
 			overallProcess = overallProcess.then(getImageUrl(regex_result[2]));
-			overallProcess = overallProcess.then(function(innerNumber){return (img)=>Promise.all([...Array(innerNumber).keys()].map(i => addImageToDoc(doc)(img)))}(number));
+			overallProcess = overallProcess.then(function(innerNumber){return (img)=>Promise.all([...Array(innerNumber).keys()].map(i => addImageToDoc(doc)(img))).then(incrementProgress)}(number));
+	}
+	else{
+		incrementProgress();
 	}
 	}
 	
 	overallProcess = overallProcess
-		.then(function(){doc.end();})
-		.catch(console.log.bind(console));
-		//doc.end();
-	
+		//.then(function(){doc.end();})
+		//.catch(console.log.bind(console));	
 }
 
 function dragOverHandler(e) {
@@ -179,3 +184,12 @@ function dropHandler(ev) {
   }
 }
 
+
+
+function incrementProgress(){
+	progress++;
+	var elem = document.getElementById("progressBar");
+	var width = Math.ceil(progress / taskSize * 100);
+	console.log("progress: " + width);
+	elem.style.width = width + "%";
+}
