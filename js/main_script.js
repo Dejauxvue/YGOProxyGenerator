@@ -47,6 +47,7 @@ function requestArrayBuffer(url) {
 }
 
 var imagePos = 0;
+var failedLines = [];
 
 const cardWidth = 2.32 * 72;// a card is 2.5 inch and 1 point is 1/72 inch
 const cardHeight = 3.35 * 72;
@@ -101,6 +102,7 @@ function getImageUrl(cardNameOrId){
 
 function generateProxies(){
 	imagePos = 0;
+	failedLines = [];
 	
 	// create a document the same way as above
 	const doc = new PDFDocument;
@@ -133,13 +135,23 @@ function generateProxies(){
 			console.log(lines[i]);
 			console.log(regex_result);
 			console.log("number: " + number);
-			overallProcess = overallProcess.then(getImageUrl(regex_result[2]));
-			overallProcess = overallProcess.then(function(innerNumber){return (img)=>Promise.all([...Array(innerNumber).keys()].map(i => addImageToDoc(doc)(img)))}(number));
+			overallProcess = overallProcess.then(getImageUrl(regex_result[2]))
+			.then(
+				function(innerNumber){return (img)=>Promise.all([...Array(innerNumber).keys()].map(i => addImageToDoc(doc)(img)));}(number), 
+				function(line){return () => failedLines.push(line);} (regex_result[2])
+			);
+
 	}
 	}
 	
 	overallProcess = overallProcess
-		.then(function(){doc.end();})
+		.then(()=>{
+			if(failedLines.length != 0){
+				var error_message = "could not process following lines: \n";
+				failedLines.forEach(line => error_message = error_message + "\n" + line);
+				alert(error_message);
+			}})
+		.then(()=>doc.end())
 		.catch(console.log.bind(console));
 		//doc.end();
 	
@@ -178,4 +190,6 @@ function dropHandler(ev) {
     }
   }
 }
+
+
 
