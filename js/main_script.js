@@ -80,15 +80,15 @@ function addImageToDoc(doc){
 
 function getImageUrl(cardNameOrId){
 	return ()=>{
-		return request('https://db.ygoprodeck.com/api/v6/cardinfo.php?name=' + cardNameOrId)
-		.catch((function(name){return (error)=>request('https://db.ygoprodeck.com/api/v6/cardinfo.php?id=' + name)})(cardNameOrId))
+		return request('https://db.ygoprodeck.com/api/v6/cardinfo.php?name=' + encodeURIComponent(cardNameOrId))
+		.catch((function(name){return (error)=>request('https://db.ygoprodeck.com/api/v6/cardinfo.php?id=' + encodeURIComponent(name))})(cardNameOrId))
 		.catch(function(name){
 			return (error)=>
 			{
 				while(name.length < 8){
 				name = '0' +name;
 				}
-			return request('https://db.ygoprodeck.com/api/v6/cardinfo.php?id=' + name);}
+			return request('https://db.ygoprodeck.com/api/v6/cardinfo.php?id=' + encodeURIComponent(name));}
 		}(cardNameOrId))
 		.then(function (result){
 			var data = JSON.parse(result);
@@ -128,9 +128,9 @@ function generateProxies(){
 
 		
 		//var regex_id_nr = 
-		var regex_name = /^(?:([1-9][0-9]*) )?([A-Za-z0-9?!,:"\/\-.@]+(?: [A-Za-z0-9?!,:"\/\-.@]+)*)/;
+		var regex_name = /^(?:([1-9][0-9]*)(?: ))?(.+)/;
 		var regex_result = regex_name.exec(lines[i]);
-		if(regex_result){
+		//if(regex_result){
 			var number = regex_result[1] === undefined ? 1 : parseInt(regex_result[1]);
 			console.log(lines[i]);
 			console.log(regex_result);
@@ -141,7 +141,7 @@ function generateProxies(){
 				function(line){return () => failedLines.push(line);} (regex_result[2])
 			);
 
-	}
+	//}
 	}
 	
 	overallProcess = overallProcess
