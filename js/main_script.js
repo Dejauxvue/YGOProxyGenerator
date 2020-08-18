@@ -56,6 +56,11 @@ const pdfHeight= 11.69 * 72;
 
 function addImageToDoc(doc){
 	return (img_url)=>{
+		if(imagePos >= imgCountHorizontal * imgCountVertical)
+			{
+				doc.addPage();
+				imagePos = 0;
+			}
 			console.log('image: ');
 			console.log(img_url);
 			var scaledHeight = cardHeight * document.getElementById("card_scale").value ;
@@ -67,14 +72,11 @@ function addImageToDoc(doc){
 			var imgCountVertical = Math.floor((pdfHeight-2*document.getElementById("margin_document").value) / scaledHeightPlusMargin);
 			var xPos = imagePos%imgCountHorizontal;
 			var yPos = Math.floor(imagePos/imgCountHorizontal);
-			imagePos = (imagePos + 1);	
+			
 			doc.image(img_url, Number(document.getElementById("margin_document").value) + xPos * scaledWidthPlusMargin, 
 				Number(document.getElementById("margin_document").value) + yPos * scaledHeightPlusMargin, {width: scaledWidth});
-			if(imagePos >= imgCountHorizontal * imgCountVertical)
-			{
-				doc.addPage();
-				imagePos = 0;
-			}
+				
+			imagePos = (imagePos + 1);			
 	};
 }
 
