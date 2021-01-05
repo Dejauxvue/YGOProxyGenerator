@@ -55,12 +55,7 @@ const pdfWidth = 8.27 * 72;
 const pdfHeight= 11.69 * 72;
 
 function addImageToDoc(doc){
-	return (img_url)=>{
-		if(imagePos >= imgCountHorizontal * imgCountVertical)
-			{
-				doc.addPage();
-				imagePos = 0;
-			}
+	return (img_url)=>{			
 			console.log('image: ');
 			console.log(img_url);
 			var scaledHeight = cardHeight * document.getElementById("card_scale").value ;
@@ -70,6 +65,13 @@ function addImageToDoc(doc){
 			console.log(scaledWidthPlusMargin);
 			var imgCountHorizontal = Math.floor((pdfWidth - 2*document.getElementById("margin_document").value) / scaledWidthPlusMargin);
 			var imgCountVertical = Math.floor((pdfHeight-2*document.getElementById("margin_document").value) / scaledHeightPlusMargin);
+			
+			if(imagePos >= imgCountHorizontal * imgCountVertical)
+			{
+				doc.addPage();
+				imagePos = 0;
+			}
+			
 			var xPos = imagePos%imgCountHorizontal;
 			var yPos = Math.floor(imagePos/imgCountHorizontal);
 			
@@ -82,21 +84,21 @@ function addImageToDoc(doc){
 
 function getImageUrl(cardNameOrId){
 	return ()=>{
-		return request('https://db.ygoprodeck.com/api/v6/cardinfo.php?name=' + encodeURIComponent(cardNameOrId))
-		.catch((function(name){return (error)=>request('https://db.ygoprodeck.com/api/v6/cardinfo.php?id=' + encodeURIComponent(name))})(cardNameOrId))
+		return request('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=' + encodeURIComponent(cardNameOrId))
+		.catch((function(name){return (error)=>request('https://db.ygoprodeck.com/api/v7/cardinfo.php?id=' + encodeURIComponent(name))})(cardNameOrId))
 		.catch(function(name){
 			return (error)=>
 			{
 				while(name.length < 8){
 				name = '0' +name;
 				}
-			return request('https://db.ygoprodeck.com/api/v6/cardinfo.php?id=' + encodeURIComponent(name));}
+			return request('https://db.ygoprodeck.com/api/v7/cardinfo.php?id=' + encodeURIComponent(name));}
 		}(cardNameOrId))
 		.then(function (result){
 			var data = JSON.parse(result);
 			console.log('requesting result');
 			console.log(data);
-			return requestArrayBuffer(data[0].card_images[0].image_url);
+			return requestArrayBuffer(data.data[0].card_images[0].image_url);
 		});
 	};
 }
@@ -139,8 +141,8 @@ function generateProxies(){
 			console.log("number: " + number);
 			overallProcess = overallProcess.then(getImageUrl(regex_result[2]))
 			.then(
-				function(innerNumber){return (img)=>Promise.all([...Array(innerNumber).keys()].map(i => addImageToDoc(doc)(img)));}(number), 
-				function(line){return () => failedLines.push(line);} (regex_result[2])
+				function(innerNumber){return (img)=>Promise.all([...Array(innerNumber).keys()].map(i => addImageToDoc(doc)(img)));}(number)
+				//function(line){return () => failedLines.push(line);} (regex_result[2])
 			);
 
 		}
@@ -155,8 +157,6 @@ function generateProxies(){
 			}})
 		.then(()=>doc.end())
 		.catch(console.log.bind(console));
-		//doc.end();
-	
 }
 
 function dragOverHandler(e) {
