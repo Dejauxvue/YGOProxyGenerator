@@ -49,8 +49,8 @@ function requestArrayBuffer(url) {
 var imagePos = 0;
 var failedLines = [];
 
-const cardWidth = 2.32 * 72;// a card is 2.5 inch and 1 point is 1/72 inch
-const cardHeight = 3.35 * 72;
+const cardWidth = 2.25 * 72;// a card is 2.25 inch and 1 point is 1/72 inch
+//const cardHeight = 3.25 * 72;
 const pdfWidth = 8.27 * 72;
 const pdfHeight= 11.69 * 72;
 
@@ -58,8 +58,9 @@ function addImageToDoc(doc){
 	return (img_url)=>{			
 			console.log('image: ');
 			console.log(img_url);
-			var scaledHeight = cardHeight * document.getElementById("card_scale").value ;
+			var img = doc.openImage(img_url);
 			var scaledWidth = cardWidth * document.getElementById("card_scale").value;
+			var scaledHeight = scaledWidth / img.width * img.height;
 			var scaledWidthPlusMargin = scaledWidth + Number(document.getElementById("margin_cards").value);
 			var scaledHeightPlusMargin = scaledHeight + Number(document.getElementById("margin_cards").value);
 			console.log(scaledWidthPlusMargin);
@@ -74,6 +75,7 @@ function addImageToDoc(doc){
 			
 			var xPos = imagePos%imgCountHorizontal;
 			var yPos = Math.floor(imagePos/imgCountHorizontal);
+			
 			
 			doc.image(img_url, Number(document.getElementById("margin_document").value) + xPos * scaledWidthPlusMargin, 
 				Number(document.getElementById("margin_document").value) + yPos * scaledHeightPlusMargin, {width: scaledWidth});
