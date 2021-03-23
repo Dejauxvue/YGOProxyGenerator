@@ -49,10 +49,10 @@ function requestArrayBuffer(url) {
 var imagePos = 0;
 var failedLines = [];
 
-const pdfPointsPerInch = 74.5;
-const cardWidth = 2.32283 * pdfPointsPerInch;// a card is 2.32 inch and 1 point is 1/72 inch
+const pdfPointsPerInch = 72;
+const cardWidth = 2.32 * pdfPointsPerInch;// a card is 2.32 inch and 1 point is 1/72 inch
 //const cardHeight = 3.25 * pdfPointsPerInch;
-const pdfWidth = 8.26772 * pdfPointsPerInch;
+const pdfWidth = 8.26 * pdfPointsPerInch;
 const pdfHeight= 11.69 * pdfPointsPerInch;
 
 
