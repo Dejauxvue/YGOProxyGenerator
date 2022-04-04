@@ -148,8 +148,8 @@ function generateProxies(){
 			console.log("number: " + number);
 			overallProcess = overallProcess.then(getImageUrl(regex_result[2]))
 			.then(
-				function(innerNumber){return (img)=>Promise.all([...Array(innerNumber).keys()].map(i => addImageToDoc(doc)(img)));}(number)
-				//function(line){return () => failedLines.push(line);} (regex_result[2])
+				function(innerNumber){return (img)=>Promise.all([...Array(innerNumber).keys()].map(i => addImageToDoc(doc)(img)));}(number),
+				function(line){return () => failedLines.push(line);} (regex_result[2])
 			);
 
 		}
