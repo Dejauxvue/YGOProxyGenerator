@@ -116,7 +116,7 @@ function generateProxies(){
 	failedLines = [];
 	
 	// create a document the same way as above
-	const doc = new PDFDocument;
+	const doc = new PDFDocument({size: document.getElementById("paper_size").value});
 
 	// pipe the document to a blob
 	const stream = doc.pipe(blobStream());

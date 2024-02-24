@@ -28,7 +28,7 @@ header {
 
 /* Colors */
 
-#mobilehowto, [tooltip1]::after, [tooltip2]::after, [tooltip3]::after, button {
+#mobilehowto, [tooltip1]::after, [tooltip2]::after, [tooltip3]::after,[tooltip4]::after, button {
 color: var(--darkblue);
 }
 header, body {
@@ -43,7 +43,11 @@ a, textarea, input[type=number] {
   color: var(--orange);
 }
 
-#mobilehowto, [tooltip1]::after, [tooltip2]::after, [tooltip3]::after, button, button::before, button:hover {
+input[type=text] {
+  color: var(--orange);
+}
+
+#mobilehowto, [tooltip1]::after, [tooltip2]::after, [tooltip3]::after,[tooltip4]::after, button, button::before, button:hover {
   background: var(--orange);
 }
 
@@ -145,7 +149,8 @@ footer {
   grid-template-areas:
   'card_scale scale'
   'margin_cards marginc'
-  'margin_document margind';
+  'margin_document margind'
+  'paper_size papers';
   grid-auto-columns: 1fr 10fr;
 }
 
@@ -160,8 +165,12 @@ footer {
 #margin_document {
   grid-area: margin_document;
 }
+#paper_size {
+  grid-area: paper_size;
+}
 
-.scale, .marginc, .margind{
+
+.scale, .marginc, .margind, .papers{
   position: relative;
   top: 0.4rem;
   cursor: help;
@@ -179,9 +188,20 @@ footer {
   grid-area: margind;
 }
 
+.papers {
+  grid-area: papers;
+}
+
+
 /* Input Styles */
 
 textarea, input[type=number]  {
+  border-radius: 9px;
+  background: none;
+  font-size: 24px;
+}
+
+input[type=text]  {
   border-radius: 9px;
   background: none;
   font-size: 24px;
@@ -204,9 +224,17 @@ input[type=number] {
   text-align: center;
 }
 
+input[type=text] {
+  border: 2px solid var(--orange);
+  width: 70px;
+  margin: 0.25rem;
+  font-size: 18px;
+  text-align: center;
+}
+
 /* Tooltips */
 
-[tooltip1]::after, [tooltip2]::after, [tooltip3]::after {
+[tooltip1]::after, [tooltip2]::after, [tooltip3]::after, [tooltip4]::after {
   text-align: center;
   box-sizing: border-box;
   padding: 10px;
@@ -236,7 +264,11 @@ input[type=number] {
   content: attr(tooltip3);
 }
 
-[tooltip1]:hover::after, [tooltip2]:hover::after, [tooltip3]:hover::after {
+[tooltip4]::after {
+  content: attr(tooltip4);
+}
+
+[tooltip1]:hover::after, [tooltip2]:hover::after, [tooltip3]:hover::after, [tooltip4]:hover::after {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
@@ -374,10 +406,12 @@ button:active {
     'marginc'
     'margin_cards'
     'margind'
-    'margin_document';
+    'margin_document'
+	'papers'
+	'paper_size';
   }
 
-  .scale, .marginc, .margind{
+  .scale, .marginc, .margind, .papers{
     position: relative;
     top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -415,7 +449,7 @@ button:active {
   
   /* Tooltips */
 
-  [tooltip1]::after, [tooltip2]::after, [tooltip3]::after {
+  [tooltip1]::after, [tooltip2]::after, [tooltip3]::after, [tooltip4]::after {
     display: none;
   }
 
