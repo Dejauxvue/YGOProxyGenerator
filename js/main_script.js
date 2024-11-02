@@ -52,8 +52,8 @@ var failedLines = [];
 const pdfPointsPerInch = 72;
 const cardWidth = 2.32 * pdfPointsPerInch;// a card is 2.32 inch and 1 point is 1/72 inch
 //const cardHeight = 3.25 * pdfPointsPerInch;
-const pdfWidth = 8.26 * pdfPointsPerInch;
-const pdfHeight= 11.69 * pdfPointsPerInch;
+var pdfWidth = 8.26 * pdfPointsPerInch;
+var pdfHeight= 11.69 * pdfPointsPerInch;
 
 
 
@@ -117,6 +117,10 @@ function generateProxies(){
 	
 	// create a document the same way as above
 	const doc = new PDFDocument({size: document.getElementById("paper_size").value});
+	
+	//set pdf widht&height for image positions
+	pdfWidth = doc.page.width;
+	pdfHeight= doc.page.height;
 
 	// pipe the document to a blob
 	const stream = doc.pipe(blobStream());
