@@ -141,6 +141,9 @@ function generateProxies(){
 			continue;
 		}
 
+		if (lines[i].trim() !== "" && !/^\d+ /.test(lines[i])) {
+			lines[i] = '1 ' + lines[i]; // Add '1 ' to the beginning of the line
+		}
 		
 		//var regex_id_nr = 
 		var regex_name = /^([1-9][0-9]*)? ?(.+?)(?: ?\[([0-9]+)\])?\s*$/;
