@@ -143,8 +143,8 @@ function generateProxies(){
 
 		
 		//var regex_id_nr = 
-		var regex_name = /^([1-9][0-9]*)? ?(.+?)(?: ?\[([0-9]+)\])?\s*$/;
-		var regex_result = regex_name.exec(lines[i]);
+		var regex_name = /^([1-9][0-9]* )?(.+?)(?: ?\[([0-9]+)\])?\s*$/;
+		var regex_result = regex_name.exec(lines[i].trim());
 		if(regex_result){
 			var amount = regex_result[1] === undefined ? 1 : parseInt(regex_result[1]);
 			var versionNumber = regex_result[3] === undefined ? 0 : parseInt(regex_result[3]);
