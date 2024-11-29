@@ -33,10 +33,10 @@
             <span class="scale" tooltip1="Adjust the card size. A factor of 0.95 means that the cards will be 95% of their original size. Most printers will scale down the PDF by another 3%">Card size scale</span>
             
             <input id="margin_cards" type=number step=1 min=0 max=100 value="0"/>
-            <span class="marginc" tooltip2="Set the amount of space between the cards in the PDF. Margin of 0 means there will be no space in between cards.">Margin between cards</span>
+            <span class="marginc" tooltip2="Set the amount of space between the cards in the PDF. Margin of 0 means there will be no space in between cards. Unit is 'pdfpoint' which is 1/72 inch.">Margin between cards</span>
             
             <input id="margin_document" type=number step=1 min=0 max=1000 value="20"/>
-            <span class="margind" tooltip3="Set the amount of space between the first card and the border of the PDF. This is needed because most printes can't print from edge to edge.">Margin between first card and document border</span>
+            <span class="margind" tooltip3="Set the amount of space between the first card and the border of the PDF. This is needed because most printes can't print from edge to edge. Unit is 'pdfpoint' which is 1/72 inch.">Margin between first card and document border</span>
 			
 			<input id="paper_size" type=text value="A4"/>
             <span class="papers" tooltip4="Type the ID of your desired paper size, e.g. A4 or leave empty for letter-size">Paper size for output pdf, use identifiers from <a href="https://pdfkit.org/docs/paper_sizes.html">pdfkit paper_sizes</a> </span>
